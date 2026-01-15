@@ -1,4 +1,5 @@
 plugins {
+	kotlin("jvm") version "2.3.0"
 	`java-library`
     alias(libs.plugins.paperweightUserdev)
 	alias(libs.plugins.runPaper) // Adds runServer and runMojangMappedServer tasks for testing
@@ -6,10 +7,12 @@ plugins {
 
 dependencies {
 	paperweight.paperDevBundle(rootProject.libs.versions.paper)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 }
 
-java {
-	toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+val targetJavaVersion = 21
+kotlin {
+    jvmToolchain(targetJavaVersion)
 }
 
 // We don't need to generate an empty `vane.jar`
